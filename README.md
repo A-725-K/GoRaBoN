@@ -7,6 +7,8 @@ A small implementation of Random Boolean Networks evolving in time.
 After having seen [this video](https://www.youtube.com/watch?v=mCML2B94rUg), I felt inspired and I decided to implement a small, similar project to understand better this model and also as an excuse to practice with **Golang** :wink:
 
 ## Algorithm parameters
+With respect to the video, I decided to change the degree of randomness: instead of looking up the new value on a truth table, I decided to flip the value of the node (from 0 to 1 or viceversa) based on the list of neighbors. As a direct consequence, during an *evolution step* a node can change its value multiple times.
+
 There are 3 values to play with in your experiments:
 
 ```
