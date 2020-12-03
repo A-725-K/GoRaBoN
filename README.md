@@ -19,7 +19,7 @@ NODES : how many nodes in the DiGraph
 
 Notice that, in order to produce a squared image, `NODES` should be a perfect square and also a power of 2, while links whould be the exponent of the latter. To summarize in a simple equation:
 
-$$NODES = 2^{LINKS}$$
+$$[1]\qquad NODES = 2^{LINKS}$$
 
 ## Getting started
 First of all you have to clone this repository:
@@ -29,15 +29,23 @@ git clone https://github.com/A-725-K/GoRaBoN.git
 
 Than you have to set your desired parameters in file `main.go` and launch it with the following command:
 ```
-go run main.go
+go run main.go [-epochs n] [-links n] [-nodes n]
+
 ```
+
+You can specify on the command line 3 options:
+- **-epochs \<num\>**: number of iterations, must be $\geq 1$
+- **-links \<num\>**: number of neighbors of each node in the network, must be $\geq 1$
+- **-nodes \<num\>**: number of nodes in the *Random Boolean Network*, must follow the previous equation [1].
 
 Finally, to get an animated gif like the one at the beginning of this *README*, you have to install the requirements and launch the *Python* script in the directory *plot*:
 ```
 cd plot
 pip install -r requirements.txt
-python3 plot_results.py
+python3 plot_results.py <EPOCHS>
 ```
+
+where `<EPOCHS>` must match the parameter given to the Go script.
 
 Enjoy yourself! :smile:
 

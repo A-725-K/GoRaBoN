@@ -1,12 +1,31 @@
 import os
+import sys
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.animation as ani
 
-EPOCHS = 50
+
+EPOCHS = None
 RES_DIR = '../res'
+
+
+def abort():
+    print('Usage: python3 plot_results.py <EPOCHS>')
+    exit(1)
+
+
+if len(sys.argv) != 2:
+    abort()
+
+try:
+    EPOCHS = int(sys.argv[1])
+except:
+    abort()
+
+if EPOCHS < 1:
+    abort()
 
 fig = plt.figure()
 plt.axis('off')

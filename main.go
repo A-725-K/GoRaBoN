@@ -1,18 +1,20 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math"
 	"math/rand"
+	"os"
 	rbn "rbn/RandomBooleanNetworks"
 	"time"
 )
 
 // some useful constants
-const (
-	EPOCHS = 50   //how many iterations in the generation
-	LINKS  = 12   //how many neighbors has each node in the DiGraph
-	NODES  = 4096 //how many nodes in the network
+var (
+	EPOCHS int //how many iterations in the generation
+	LINKS  int //how many neighbors has each node in the DiGraph
+	NODES  int //how many nodes in the network
 )
 
 func isPowerOf2(n int) bool {
@@ -48,12 +50,21 @@ func checkParameters(LINKS, NODES, EPOCHS int) (bool, string) {
 	return true, ""
 }
 
+func checkArgs() {
+	flag.IntVar(&EPOCHS, "epochs", 50, "Number of iterations, >= 1")
+	flag.IntVar(&LINKS, "links", 12, "Number of conections of each node in the network, >= 1")
+	flag.IntVar(&NODES, "nodes", 4096, "Number of nodes in the network, == 2^K")
+
+	flag.Parse()
+}
+
 func main() {
 	randGen := rand.New(rand.NewSource(time.Now().UnixNano()))
 
+	checkArgs()
 	if t, err := checkParameters(LINKS, NODES, EPOCHS); !t {
 		fmt.Println(err)
-		return
+		os.Exit(1)
 	}
 
 	rbn := rbn.NewRBN(NODES, LINKS, randGen)
